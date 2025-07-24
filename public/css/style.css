@@ -64,16 +64,54 @@ body {
 .listing-card {
     border: none !important;
     margin-bottom: 2rem;
+    background: transparent !important;
+    overflow: visible;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.popup-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-card:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .popup-card:hover {
+        /* transform: scale(1.03); */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        z-index: 2;
+    }
 }
 
 .card-img-top {
     border-radius: 1rem !important;
     width: 100% !important;
     object-fit: cover !important;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.popup-card:hover .card-img-top {
+    transform: scale(1.05);
 }
 
 .card-body {
     padding: 0 !important;
+    background: transparent !important; /* Remove white sheet */
+    transition: margin-top 0.3s ease;
+    z-index: 1;
+    position: relative;
+}
+
+.popup-card:hover .card-body {
+    margin-top: 0.5rem; /* Moves text down smoothly */
+    transform: translateY(6px);
 }
 
 .card-text p {
@@ -87,6 +125,7 @@ body {
 /* Card Effect */
 .card-img-overlay {
     opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .card-img-overlay:hover {
