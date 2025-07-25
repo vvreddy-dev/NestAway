@@ -23,6 +23,17 @@
             </p>
             <p class="card-text"><%= listing.location %></p>
             <p class="card-text"><%= listing.country %></p>
+            <% if(currUser && !listing.owner._id.equals(currUser._id)) { %>
+                <% if(currUser.bookings && currUser.bookings.map(id => id.toString()).includes(listing._id.toString())) { %>
+                    <form method="POST" action="/cart/cancel/<%= listing._id %>">
+                        <button class="btn btn-danger">Cancel Booking</button>
+                    </form>
+                <% } else { %>
+                    <form method="POST" action="/book/<%= listing._id %>">
+                        <button class="btn btn-success">Book</button>
+                    </form>
+                <% } %>
+            <% } %>
         </div>
     </div>
     <br />

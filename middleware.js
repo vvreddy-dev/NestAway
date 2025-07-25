@@ -2,6 +2,7 @@ const Listing = require("./models/listing");
 const Review = require("./models/review");
 const { listingSchema, reviewSchema } = require("./schema.js");
 const ExpressError = require("./utils/ExpressError.js");
+const mongoose = require("mongoose");
 
 module.exports.isLoggedIn = (req, res, next) => {
     if (!req.isAuthenticated()) {
@@ -57,6 +58,13 @@ module.exports.isReviewAuthor = async (req, res, next) => {
     if (!review.author.equals(res.locals.currUser._id)) {
         req.flash("error", "You are not author of this Review");
         return res.redirect(`/listings/${id}`);
+    }
+    next();
+};
+
+module.exports.isValidObjectId = (param = "id") => (req, res, next) => {
+    if (!mongoose.Types.ObjectId.isValid(req.params[param])) {
+        return next(new ExpressError(404, "Page Not Found!"));
     }
     next();
 };
