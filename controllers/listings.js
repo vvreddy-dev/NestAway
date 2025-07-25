@@ -13,7 +13,7 @@ module.exports.index = async (req, res) => {
         filter.$or = [
             { title: { $regex: search, $options: "i" } },
             { location: { $regex: search, $options: "i" } },
-            { description: { $regex: search, $options: "i" } },
+            { country: { $regex: search, $options: "i" } },
         ];
     }
     const allListings = await Listing.find(filter);
