@@ -64,7 +64,7 @@ const sessionOptions = {
 };
 
 store.on("error", () => {
-    console.lg("ERROR in MONGO SESSION STORE", err);
+    console.log("ERROR in MONGO SESSION STORE", err);
 });
 
 // // Basic Route
